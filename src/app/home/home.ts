@@ -14,6 +14,7 @@ import {HousingLocationInfo} from '../housinglocation';
       </form>
     </section>
     <section class="results">
+      <!-- Step 2: put this component's house into the child's "housingLocation" input slot -->
       <app-housing-location [housingLocation]="housingLocation" />
     </section>
   `,
@@ -22,6 +23,7 @@ import {HousingLocationInfo} from '../housinglocation';
 export class Home {
   readonly baseUrl = 'https://angular.dev/assets/images/tutorials/common';
 
+  // Step 1: the parent owns the house data that gets passed down to HousingLocation.
   housingLocation: HousingLocationInfo = {
     id: 9999,
     name: 'Test Home',
