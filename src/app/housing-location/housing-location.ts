@@ -6,10 +6,17 @@ import {HousingLocationInfo} from '../housinglocation';
   selector: 'app-housing-location',
   styleUrl: './housing-location.css',
   template: `
-    <p>
-      <!-- Step 4: read the house from the input. The () is needed because inputs are signals. -->
-      {{ housingLocation().name }}
-    </p>
+    <!-- Step 4: read the house from the input. The () is needed because inputs are signals. -->
+    <section class="listing">
+      <img
+        class="listing-photo"
+        [src]="housingLocation().photo"
+        alt="Exterior photo of {{ housingLocation().name }}"
+        crossorigin
+      />
+      <h2 class="listing-heading">{{ housingLocation().name }}</h2>
+      <p class="listing-location">{{ housingLocation().city }}, {{ housingLocation().state }}</p>
+    </section>
   `,
 })
 export class HousingLocation {
