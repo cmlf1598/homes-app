@@ -1,3 +1,4 @@
+//ng generate component housingLocation
 import { Component, input } from '@angular/core';
 import {HousingLocationInfo} from '../housinglocation';
 import { Router, RouterLink } from '@angular/router';
