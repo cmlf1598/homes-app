@@ -1,5 +1,5 @@
 //ng generate component home
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import {HousingLocation} from '../housing-location/housing-location';
 import {HousingLocationInfo} from '../housinglocation';
 import {HousingService} from '../housing-service';
@@ -28,6 +28,7 @@ export class Home {
   housingLocationList: HousingLocationInfo[] = [];
   //Home gets the service with inject(HousingService)
   housingService: HousingService = inject(HousingService);
+  changeDetectorRef = inject(ChangeDetectorRef);
 
   filteredLocationList: HousingLocationInfo[] = []; // hold the values that match the search criteria entered by the user.
 
@@ -41,11 +42,16 @@ export class Home {
       housingLocation?.city.toLowerCase().includes(text.toLowerCase()),
     );
   }
-  
+
   //fills housingLocationList from getAllHousingLocations() in the constructor.
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
-    this.filteredLocationList = this.housingLocationList;
+    this.housingService
+      .getAllHousingLocations()
+      .then((housingLocationList: HousingLocationInfo[]) => {
+        this.housingLocationList = housingLocationList;
+        this.filteredLocationList = housingLocationList;
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
 }
